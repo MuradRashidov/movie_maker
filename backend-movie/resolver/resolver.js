@@ -1,23 +1,20 @@
+const Movie = require("../model/model");
 const resolvers =  {
     movies:()=>{
-        return [{
-            id:1, name:"X____",genre:"Y____",year:"2023", image:"https://shorturl.at/aefv9" ,surname:"r"
-        },
-        {
-            id:2,  name:"A____",genre:"B____",year:"2023",image:"https://shorturl.at/aefv9" ,surname:"r"
-        },
-        {
-            id:3, name:"K____",genre:"L____",year:"2023",image:"https://shorturl.at/aefv9" ,surname:"r"
-        }
-        ,
-        {
-            id:4, name:"_____",genre:"_____",year:"2023",image:"https://shorturl.at/aefv9" ,surname:"r"
-        }]
+        return Movie.find({});
     },
-    addMovie:(args)=>{
-        return{
-            name:args.name
-        }
+    movieByName:(args)=>{
+       return Movie.findOne({name:args.name});
+    },
+    addMovie:async(args)=>{
+        let movie = new Movie({
+            name:args.name,
+            genre:args.genre,
+            year:args.year
+        })
+        await movie.save();
+        return movie
+    
     }
 }
 

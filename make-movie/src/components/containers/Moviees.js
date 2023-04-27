@@ -1,7 +1,19 @@
-import React, { Component } from 'react'
-import Moviee from '../Moviee'
+import React, { Component } from 'react';
+import Moviee from '../Moviee';
+import { gql } from 'apollo-boost';
+import {graphql} from 'react-apollo'
+const allMovies = gql`
+   {
+    movies{
+       name
+       genre
+       year
+    }
+   }
+`
 
-export default class Moviees extends Component {
+ class Moviees extends Component {
+  
     state = {
         movies: [
             {
@@ -20,6 +32,7 @@ export default class Moviees extends Component {
         ]
     }
   render() {
+    console.log(this.props)
     return (
       <div className='movies'>
         {this.state.movies.map(movie=>{
@@ -37,3 +50,5 @@ export default class Moviees extends Component {
     )
   }
 }
+
+export default graphql(allMovies)(Moviees);
