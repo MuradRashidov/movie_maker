@@ -1,54 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Moviee from '../Moviee';
-import { gql } from 'apollo-boost';
-import {graphql} from 'react-apollo'
-const allMovies = gql`
-   {
-    movies{
-       name
-       genre
-       year
-    }
-   }
-`
+//import { gql } from 'apollo-boost';
+import {useQuery} from 'react-apollo';
+import { allMovies } from '../../queries/queries';
 
- class Moviees extends Component {
+
+ const Moviees = () => {
   
-    state = {
-        movies: [
-            {
-                id:1, name:"X____",ganre:"Y____",year:"2023", image:"https://shorturl.at/aefv9" 
-            },
-            {
-                id:2,  name:"A____",ganre:"B____",year:"2023",image:"https://shorturl.at/aefv9" 
-            },
-            {
-                id:3, name:"K____",ganre:"L____",year:"2023",image:"https://shorturl.at/aefv9" 
-            }
-            ,
-            {
-                id:4, name:"_____",ganre:"_____",year:"2023",image:"https://shorturl.at/aefv9" 
-            }
-        ]
+    
+  let {data,loading} =  useQuery(allMovies)
+
+    //let data = this.props.data;
+    if(loading){
+      return <h2 className='message'>We are loading your movies</h2>
     }
-  render() {
-    console.log(this.props)
+    if(data.movies.length ===0){
+      return <h2 className='message'>Please add movies of your choice</h2>
+    }
     return (
       <div className='movies'>
-        {this.state.movies.map(movie=>{
+        {data.movies.map(movie=>{
              return <Moviee 
              key={movie.id} 
              name={movie.name}
              ganre={movie.ganre}
              year={movie.year}
-             image={movie.image}
+             image="https://shorturl.at/aefv9"
              >
 
              </Moviee>
         })}
       </div>
     )
-  }
+  
 }
 
-export default graphql(allMovies)(Moviees);
+export default Moviees;

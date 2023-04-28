@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 //import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from 'react-apollo';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-
+import {BrowserRouter} from "react-router-dom"
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 
@@ -16,11 +16,13 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
+  <BrowserRouter>
   <React.StrictMode>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import {HashLink} from 'react-router-hash-link';
+
 
 const Header = () => {
   return (
@@ -6,7 +8,7 @@ const Header = () => {
        <a className="logo" href='/'>Movie maker</a>
        <div className="search-container">
         <form>
-            <a href='/'>Add Movie</a>
+            <HashLink smooth to='#form'>Add Movie</HashLink>
             <input type='text' placeholder='Search..' name='search' />
             <button type='submit'><i className='fa fa-search'></i></button>
 
